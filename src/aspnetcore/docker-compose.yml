@@ -1,6 +1,14 @@
 version: "3"
 services:
+  dnmonster:
+    container_name : dnmonster
+    image: amouat/dnmonster:1.0
+  
+  redis:
+    image: redis   
+
   dotnetcontainer:
+    container_name: dotnet
     build: .
     image: dotnet
     ports:
@@ -15,4 +23,8 @@ services:
     volumes:  
       -  C:\\Users\\admin\\.aspnet\\https:/https/
       -  F:\\Code\\my\\dotnet-docker\\src\\aspnetcore:/app
-
+    depends_on:
+      - dnmonster
+      - redis
+    
+ 
